@@ -3,6 +3,8 @@ from docx import Document
 from private import API_KEY
 
 openai.api_key = API_KEY
+audio_file_path = "audio/voicetest.m4a"
+
 
 def transcribe_audio(audio_file_path):
     with open(audio_file_path, 'rb') as audio_file:
@@ -89,6 +91,22 @@ def sentiment_analysis(transcription):
     )
     return response['choices'][0]['message']['content']
 
+def save_as_docx(minutes, filename):
+    doc = Document()
+    for key, value in minutes.items():
+        heading = ' '.join(word.capitalize() for word in key.split('_'))
+        doc.add_heading(heading, level=1)
+        doc.add_paragraph(value)
+        doc.add_paragraph()
+    doc.save(filename)
 
-#result = transcribe_audio("audio/voicetest.m4a")
+# Let's run it
+transcription = transcribe_audio(audio_file_path)
+minutes = meeting_minutes(transcription)
+print('Raw text of the Meeting Minutes analysis below:')
+print(minutes)
+
+save_as_docx(minutes, 'meeting_minutes.docx')
+
+
 #print(result)
