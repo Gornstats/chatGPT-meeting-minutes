@@ -1,5 +1,8 @@
 import openai
 from docx import Document
+from private import API_KEY
+
+openai.api_key = API_KEY
 
 def transcribe_audio(audio_file_path):
     with open(audio_file_path, 'rb') as audio_file:
@@ -7,4 +10,6 @@ def transcribe_audio(audio_file_path):
     return transcription['text']
 
 
-#transcribe_audio("audio/EarningsCall.wav")
+result = transcribe_audio("audio/voicetest.m4a")
+
+print(result)
