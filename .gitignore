@@ -119,6 +119,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+private.py
+audio/
 
 # Spyder project settings
 .spyderproject
