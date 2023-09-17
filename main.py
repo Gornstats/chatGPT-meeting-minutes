@@ -3,7 +3,7 @@ from docx import Document
 from private import API_KEY
 
 openai.api_key = API_KEY
-audio_file_path = "audio/voicetest.m4a"
+audio_file_path = "audio/mel_voice.m4a"
 
 
 def transcribe_audio(audio_file_path):
@@ -102,11 +102,10 @@ def save_as_docx(minutes, filename):
 
 # Let's run it
 transcription = transcribe_audio(audio_file_path)
+print('Raw text of the transcription by Whisper is below:')
+print(transcription)
 minutes = meeting_minutes(transcription)
 print('Raw text of the Meeting Minutes analysis below:')
 print(minutes)
 
-save_as_docx(minutes, 'meeting_minutes.docx')
-
-
-#print(result)
+save_as_docx(minutes, 'meeting_minutes_Mel.docx')
